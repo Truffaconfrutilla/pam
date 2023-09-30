@@ -50,6 +50,8 @@ export class RegisterPage implements OnInit {
   
   //async register(nombre: any, correo: any, contraseña: any, direccionSede: any, conductor: any, licenciaConductor: any, patenteVehiculo: any) {
   async register(nombre: any, correo: any, contraseña: any) {
+    var f = this.formularioRegister.value;
+
     if (this.formularioRegister.invalid) {
       Swal.fire({
         icon: 'warning',
@@ -75,6 +77,13 @@ export class RegisterPage implements OnInit {
       console.log(nombre.value, correo.value, contraseña.value);
       
     }
+    var usuario = {
+      name: f.name,
+      email: f.email,
+      password: f.password,
+      confpassword: f.confpassword
+    }
+    localStorage.setItem('usuario',JSON.stringify(usuario));
   }
   
 

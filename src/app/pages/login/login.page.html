@@ -18,26 +18,20 @@
     <ion-card-header >       
       <ion-text color="azulduoc" style="font-weight: bold; font-size: 30px;"> <ion-icon name="enter-outline"></ion-icon> Login</ion-text>
     </ion-card-header> 
-      <ion-item>
-        <ion-input #correo type="text" color="azulduoc" label="Ingrese Usuario:" labelPlacement="floating" placeholder="Ej: jefeyapague@porfavor@porfis.aaa"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input #pass type="password" color="azulduoc" label="Ingrese Contraseña:" labelPlacement="floating" placeholder="Ej: Quierodormir123"></ion-input>
-      </ion-item>
-      <ion-button color="azulduoc" >Ingresar</ion-button>
-      <ion-button color="azulduoc" >Registrarse</ion-button>
-      <ion-text color="amarilloduoc" style="font-size: 12px;font-weight: bolder;"  >Recuperar contraseña</ion-text>
-  </ion-card>
+      <form [formGroup]="formularioLogin">      
+        <ion-item>
+          <ion-input formControlName="email" #correo type="text" color="azulduoc" label="Ingrese email de Usuario:" labelPlacement="floating" placeholder="Ej: jefeyapague@porfavor@porfis.aaa"></ion-input>
+        </ion-item>
 
-    <ion-card-content >
-      
-    </ion-card-content>
+        <ion-item>
+          <ion-input formControlName="password" #pass type="password" color="azulduoc" label="Ingrese Contraseña:" labelPlacement="floating" placeholder="Ej: Quierodormir123"></ion-input>
+        </ion-item>
+
+        <ion-button color="azulduoc" (click)="ingresar()">Ingresar</ion-button>
+        <ion-button color="azulduoc" [routerLink]="['./register']">Registrarse</ion-button>
+        <br>
+        <ion-text color="amarilloduoc" style="font-size: 12px;font-weight: bolder;" >Recuperar contraseña</ion-text>
+      </form>    
+    </ion-card>
 
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <div class="duoc-icon" style="margin-left: 85px; margin-top: 20px;"></div>
-  </ion-toolbar>
-</ion-footer>
-

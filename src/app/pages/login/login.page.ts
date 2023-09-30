@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController, ToastController } from '@ionic/angular';
+import { MenuController, NavController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 
@@ -19,6 +19,7 @@ export class LoginPage implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private alertController: AlertController,
+    private navCtrl: NavController, 
     ) {
 
     this.formularioLogin= this.fb.group({
@@ -48,6 +49,8 @@ export class LoginPage implements OnInit {
   
       if (usuario.email == f.email && usuario.password == f.password) {
         console.log('ingresado');
+        localStorage.setItem('ingresado','true');
+        this.navCtrl.navigateRoot('home')
       } else {
         Swal.fire({
           icon: 'question',

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController, ToastController } from '@ionic/angular';
+import { MenuController, NavController, ToastController } from '@ionic/angular';
 import { AbstractControl } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import Swal from 'sweetalert2';
-
-
 
 
 @Component({
@@ -22,7 +20,8 @@ export class RegisterPage implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private alertController: AlertController,
-    private toastController:ToastController
+    private toastController:ToastController,
+    private navCtrl: NavController,
     ) {
 
   this.formularioRegister = this.fb.group({
@@ -84,7 +83,10 @@ export class RegisterPage implements OnInit {
       confpassword: f.confpassword
     }
     localStorage.setItem('usuario',JSON.stringify(usuario));
+    localStorage.setItem('ingresado','true');
+    this.navCtrl.navigateRoot('home')
   }
   
 
 }
+

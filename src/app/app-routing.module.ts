@@ -24,7 +24,11 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule),
     canActivate: [NoIngresadoGuard]
+  },  {
+    path: 'usuarios',
+    loadChildren: () => import('./users/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   },
+
 
 ];
 

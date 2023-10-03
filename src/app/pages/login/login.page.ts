@@ -64,6 +64,10 @@ export class LoginPage implements OnInit {
       console.error('No se encontraron datos de usuario en el localStorage.');
     }
   }
+
+  registrar() {
+    this.router.navigate(['register']);
+  }
   
 
 }

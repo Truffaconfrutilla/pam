@@ -47,7 +47,7 @@ export class RegisterPage implements OnInit {
   //  toast.present()
   //}
   
-  //async register(nombre: any, correo: any, contraseña: any, direccionSede: any, conductor: any, licenciaConductor: any, patenteVehiculo: any) {
+ // async register(nombre: any, correo: any, contraseña: any, direccionSede: any, conductor: any, licenciaConductor: any, patenteVehiculo: any) {
   async register(nombre: any, correo: any, contraseña: any) {
     var f = this.formularioRegister.value;
 
@@ -75,16 +75,19 @@ export class RegisterPage implements OnInit {
       //console.log(nombre.value, correo.value, contraseña.value, direccionSede.value, conductor.value, licenciaConductor.value, patenteVehiculo.value);
       console.log(nombre.value, correo.value, contraseña.value);
       
+      var usuario = {
+        name: f.name,
+        email: f.email,
+        password: f.password,
+        confpassword: f.confpassword
+      }
+
+      localStorage.setItem('usuario',JSON.stringify(usuario));
+      localStorage.setItem('ingresado','true');
+      this.navCtrl.navigateRoot('login')
     }
-    var usuario = {
-      name: f.name,
-      email: f.email,
-      password: f.password,
-      confpassword: f.confpassword
-    }
-    localStorage.setItem('usuario',JSON.stringify(usuario));
-    localStorage.setItem('ingresado','true');
-    this.navCtrl.navigateRoot('home')
+
+
   }
   
 

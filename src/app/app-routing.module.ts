@@ -28,6 +28,30 @@ const routes: Routes = [
     path: 'usuarios',
     loadChildren: () => import('./users/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   },
+  {
+    path: 'add',
+    loadChildren: () => import('./api/add/add.module').then( m => m.AddPageModule)
+  },
+  {
+    path: 'delete',
+    loadChildren: () => import('./api/delete/delete.module').then( m => m.DeletePageModule)
+  },
+  {
+    path: 'detail',
+    loadChildren: () => import('./api/detail/detail.module').then( m => m.DetailPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./api/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'list',
+    loadChildren: () => import('./api/list/list.module').then( m => m.ListPageModule)
+  },
+  {
+    path: 'update',
+    loadChildren: () => import('./api/update/update.module').then( m => m.UpdatePageModule)
+  },
 
 
 ];

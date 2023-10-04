@@ -1,6 +1,11 @@
 export interface Usuario {
-    id?: string,
-    usuario?: string;
-    contrasenia?: string;
-    tipo?: string;
+    id?:String,
+    name?:String,
+    email?:String,
+    password?:String,
+    direccionSede?:String,
+    driver?:boolean,
+    diverLicense?:String,
+    carPlate?:String,
+    admin?:boolean,
 }

@@ -24,19 +24,19 @@
     <ion-card-content>
       <form [formGroup]="formularioRegister">
         <ion-item >
-          <ion-input formControlName="name" #nombre labelPlacement="floating" placeholder="juan">
+          <ion-input formControlName="name" #name labelPlacement="floating" placeholder="juan">
             <div slot="label">Nombre <ion-text color="danger">(Obligatorio)</ion-text></div>
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input formControlName="email" #correo labelPlacement="floating" placeholder="hi@ionic.io">
+          <ion-input formControlName="email" #email labelPlacement="floating" placeholder="hi@ionic.io">
             <div slot="label">Email <ion-text color="danger">(Obligatorio)</ion-text></div>
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input formControlName="password" #pass type="password" labelPlacement="floating" placeholder="********">
+          <ion-input formControlName="password" #password type="password" labelPlacement="floating" placeholder="********">
             <div slot="label">Contraseña <ion-text color="danger">(Obligatorio)</ion-text></div>
           </ion-input>
         </ion-item>
@@ -98,7 +98,7 @@
       
 
         <div>
-          <ion-button color="azulduoc" (click)="register(nombre,correo,pass)"[routerLink]="['/login']">Registrarse</ion-button>
+          <ion-button color="azulduoc" (click)="register(name,email,password)">Registrarse</ion-button>
         </div>
      
       </form>

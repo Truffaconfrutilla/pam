@@ -20,14 +20,26 @@
     </ion-card-header> 
       <form [formGroup]="formularioLogin">      
         <ion-item>
-          <ion-input formControlName="email" #correo type="text" color="azulduoc" label="Ingrese email de Usuario:" labelPlacement="floating" placeholder="Ej: jefeyapague@porfavor@porfis.aaa"></ion-input>
+          <ion-input #user [(ngModel)]="emailValue" formControlName="email" type="text" color="azulduoc" label="Ingrese email de Usuario:" labelPlacement="floating" placeholder="Ej: jefeyapague@porfavor@porfis.aaa"></ion-input>
         </ion-item>
+        <ion-text pasition="stacked" color="danger" *ngIf="loginForm.get('email')?.hasError('required')">
+          El correo es obligatorio.
+        </ion-text>
+        <ion-text pasition="stacked" color="danger" *ngIf="loginForm.get('email')?.hasError('email')">
+          El correo es inválido.
+        </ion-text>
 
         <ion-item>
-          <ion-input formControlName="password" #pass type="password" color="azulduoc" label="Ingrese Contraseña:" labelPlacement="floating" placeholder="Ej: Quierodormir123"></ion-input>
+          <ion-input #password [(ngModel)]="passValue" formControlName="password" type="password" color="azulduoc" label="Ingrese Contraseña:" labelPlacement="floating" placeholder="Ej: Quierodormir123"></ion-input>
         </ion-item>
+        <ion-text pasition="stacked" color="danger" *ngIf="loginForm.get('password')?.hasError('required')">
+          La contraseña es obligatoria.
+        </ion-text>
+        <ion-text pasition="stacked" color="danger" *ngIf="loginForm.get('password')?.hasError('minlength')">
+          La contraseña debe tener almenos 6 caracteres.
+        </ion-text>
 
-        <ion-button color="azulduoc" (click)="ingresar()">Ingresar</ion-button>
+        <ion-button color="azulduoc" (click)="ingresar(user,password)" [disabled]="!formularioLogin.valid">Ingresar</ion-button>
         <ion-button color="azulduoc" (click)="registrar()">Registrarse</ion-button>
         <br>
         <ion-text color="amarilloduoc" style="font-size: 12px;font-weight: bolder;" >Recuperar contraseña</ion-text>

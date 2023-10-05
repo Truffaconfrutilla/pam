@@ -1,0 +1,63 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertController, MenuController, NavController, ToastController } from '@ionic/angular';
+import { RandomUserService } from 'src/app/services/random-users.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+})
+export class LoginPage implements OnInit {
+
+  formularioLogin: FormGroup;
+  user: any; 
+  emailValue?: string;
+  passwordValue?: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private alertController: AlertController,
+    private navCtrl: NavController,    
+    private menu: MenuController,   
+    private toastController: ToastController,
+    private randomUserService: RandomUserService,
+  ) {
+    this.formularioLogin = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  ngOnInit() {
+    this.menu.enable(true);
+
+    // Llama al servicio para obtener un usuario aleatorio al iniciar el componente
+    this.randomUserService.getRandomUser().subscribe((data) => {
+      this.user = data.results[0];
+      this.emailValue = this.user.email;
+      this.passwordValue = this.user.login.password;
+      console.log(this.user.email + " " + this.user.login.password)
+    });
+  }
+
+  ingresar(user:any, password:any) {
+    this.mensajeToast("Bienvenido al Sistema!");
+    this.router.navigate(['home']);
+  }
+  
+  async mensajeToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 4000,
+      position: 'bottom'
+    });
+    toast.present()
+  }
+
+  registrar() {
+    this.router.navigate(['register']);
+  }
+}

@@ -1,30 +1,39 @@
+
 <ion-content [fullscreen]="true">
- 
+  
   <ion-app>
     <ion-menu contentId="main-content">
+      
       <ion-header>
-        <ion-toolbar color="azulduoc">
-          <div class="ion-text-center style-h-text">
-            Te<ion-text color="amarilloduoc">Llevo</ion-text>App
-          </div>
+        <ion-toolbar color="azulduoc">  
+          <ion-title>
+            ¡Bienvenido, "yo"!
+          </ion-title>        
         </ion-toolbar>
       </ion-header>
+
       <ion-content class="ion-padding">
-       <ion-list >   
+        <ion-list >   
           <ion-item >Perfil</ion-item>
           <ion-item (click)="salir()">Cerrar Session</ion-item>
         </ion-list>
       </ion-content>
+      
     </ion-menu>
     <div class="ion-page" id="main-content">
       <ion-header>
-        <ion-toolbar color="ligth">
+        <ion-toolbar color="azulduoc">
+          <div class="centered-text">
+            Te<ion-text color="amarilloduoc">Llevo</ion-text>App
+          </div>
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>         
         </ion-toolbar>
       </ion-header>      
     </div>
+    
   </ion-app>
 
 </ion-content>
+

@@ -78,10 +78,10 @@
           <ng-template #con>
             <div>
               <ion-item>
-                <ion-input #licenciaConductor type="text" color="azulduoc" label="Ingrese Licencia:" labelPlacement="floating" placeholder="Ej: https://prnt.sc/9wCZWZEKfYNC"></ion-input>
+                <ion-input formControlName="licenciaConductor" #licenciaConductor type="text" color="azulduoc" label="Ingrese Licencia:" labelPlacement="floating" placeholder="Ej: https://prnt.sc/9wCZWZEKfYNC"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-input #patenteVehiculo type="text" color="azulduoc" label="Ingrese Patente:" labelPlacement="floating" placeholder="Ej: KVR-041"></ion-input>
+                <ion-input formControlName="patenteVehiculo" #patenteVehiculo type="text" color="azulduoc" label="Ingrese Patente:" labelPlacement="floating" placeholder="Ej: KVR-041"></ion-input>
               </ion-item>
               <ion-button color="azulduoc" (click)="register()">Registrarse</ion-button>
             </div>
@@ -89,7 +89,7 @@
           
           <ng-template #sin>
             <div>
-              <ion-button color="azulduoc" (click)="register()" [routerLink]="['/login']">Registrarse</ion-button>
+              <ion-button color="azulduoc" (click)="register()">Registrarse</ion-button>
             </div>
           </ng-template>
           

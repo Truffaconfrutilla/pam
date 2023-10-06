@@ -26,7 +26,11 @@ export class RegisterPage implements OnInit {
       'name': new FormControl("", Validators.required),
       'email': new FormControl("", [Validators.required, Validators.email]),
       'password': new FormControl("", Validators.required),
-      'confpassword': new FormControl("", [Validators.required])
+      'confpassword': new FormControl("", [Validators.required]),
+      'conductor': new FormControl(false),
+      'direccionSede': new FormControl(false),
+      'licenciaConductor': new FormControl(false),
+      'patenteVehiculo': new FormControl(false),
     });
     
   }
@@ -79,27 +83,30 @@ export class RegisterPage implements OnInit {
     // Realizar aquí la lógica de registro según tus necesidades.
   
     // Redirigir al usuario después de un registro exitoso.
-    this.router.navigate(['login']);
+    
     Swal.fire({
       heightAuto: false,
       title: 'Cuenta creada con éxito!',
       timer: 5000
     });
-  
+
+    this.router.navigate(['login']);  
     console.log('Registro exitoso');
     console.log('Nombre:', name);
     console.log('Email:', email);
     console.log('Contraseña:', password);
+    console.log('conductor:', conductor);
+    console.log('direccionSede:', direccionSede);
+    console.log('licenciaConductor:', licenciaConductor);
+    console.log('patenteVehiculo:', patenteVehiculo);
+    
   
     const usuario = {
       name: name,
       email: email,
       password: password,
     };
-  
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-    localStorage.setItem('ingresado', 'true');
-    this.navCtrl.navigateRoot('login');
+    
   }
   
 }

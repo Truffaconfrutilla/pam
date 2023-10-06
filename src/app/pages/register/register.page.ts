@@ -1,9 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController, NavController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Usuario } from 'src/app/models/usuario.model';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+
+// Función independiente para validar contraseñas
+function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.get('password');
+  const confpassword = control.get('confpassword');
+
+  if (!password || !confpassword || password.value === confpassword.value) {
+    return null; // Las contraseñas coinciden
+  }
+
+  return { passwordMismatch: true }; // Las contraseñas no coinciden
+}
 
 @Component({
   selector: 'app-register',
@@ -11,7 +25,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-
   formularioRegister: FormGroup;
 
   constructor(
@@ -20,93 +33,76 @@ export class RegisterPage implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private navCtrl: NavController,
+    private authService: AuthService,
   ) {
+    this.formularioRegister = this.fb.group(
+      {
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        confpassword: ['', Validators.required],
+        direccionSede: [''],
+        conductor: [false], 
+        licenciaConductor: [''],
+        patenteVehiculo: [''],
+      },
+      {
+        validators: passwordMatchValidator, // Usar la función de validación personalizada
+      }
+    );
+  }
 
-    this.formularioRegister = this.fb.group({
-      'name': new FormControl("", Validators.required),
-      'email': new FormControl("", [Validators.required, Validators.email]),
-      'password': new FormControl("", Validators.required),
-      'confpassword': new FormControl("", [Validators.required]),
-      'conductor': new FormControl(false),
-      'direccionSede': new FormControl(false),
-      'licenciaConductor': new FormControl(false),
-      'patenteVehiculo': new FormControl(false),
-    });
-    
-  }
-  
-  passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const passwordControl = this.formularioRegister.get('password');
-  
-    if (!passwordControl) {
-      return null; // Otra opción podría ser devolver un error aquí si es necesario
-    }
-  
-    const password = passwordControl.value;
-    const confirmPassword = control.value;
-  
-    if (password !== confirmPassword) {
-      return { 'passwordMismatch': true };
-    }
-  
-    return null;
-  }
-  
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async register() {
+    const passwordControl = this.formularioRegister.get('password');
+    const confpasswordControl = this.formularioRegister.get('confpassword');
+  
+    if (passwordControl && confpasswordControl && passwordControl.value !== confpasswordControl.value) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Las contraseñas no coinciden.',
+        heightAuto: false,
+      });
+      return; // Detener el registro si las contraseñas no coinciden.
+    }
+  
     if (this.formularioRegister.invalid) {
       Swal.fire({
         icon: 'warning',
         iconColor: 'red',
         title: 'Oops...',
         text: 'Debes llenar todos los datos!',
-        heightAuto: false
+        heightAuto: false,
       });
       return; // Detener el registro si el formulario es inválido.
     }
   
-    const { name, email, password, confpassword, direccionSede, conductor, licenciaConductor, patenteVehiculo } = this.formularioRegister.value;
+    const userData: Usuario = this.formularioRegister.value;
   
-    if (password !== confpassword) {
+    try {
+      // Intentamos registrar al usuario utilizando el servicio de autenticación
+      this.authService.registrarUsuario(userData);
+  
+      // Registro exitoso, redirigimos al usuario a la página de inicio de sesión
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Las contraseñas no coinciden.',
-        heightAuto: false
+        heightAuto: false,
+        title: 'Cuenta creada con éxito!',
+        timer: 5000,
       });
-      return; // Detener el registro si las contraseñas no coinciden.
+      this.router.navigate(['login']);
+      console.log('Registro exitoso');
+      console.log('Nombre:', userData.name);
+      console.log('Email:', userData.email);
+      console.log('Contraseña:', userData.password);
+      console.log('conductor:', userData.conductor);
+      console.log('direccionSede:', userData.direccionSede);
+      console.log('licenciaConductor:', userData.licenciaConductor);
+      console.log('patenteVehiculo:', userData.patenteVehiculo);
+    } catch (error: any) {
+      // Manejo de errores si el usuario ya existe
+      console.error(error.message);
     }
-  
-    // Realizar aquí la lógica de registro según tus necesidades.
-  
-    // Redirigir al usuario después de un registro exitoso.
-    
-    Swal.fire({
-      heightAuto: false,
-      title: 'Cuenta creada con éxito!',
-      timer: 5000
-    });
-
-    this.router.navigate(['login']);  
-    console.log('Registro exitoso');
-    console.log('Nombre:', name);
-    console.log('Email:', email);
-    console.log('Contraseña:', password);
-    console.log('conductor:', conductor);
-    console.log('direccionSede:', direccionSede);
-    console.log('licenciaConductor:', licenciaConductor);
-    console.log('patenteVehiculo:', patenteVehiculo);
-    
-  
-    const usuario = {
-      name: name,
-      email: email,
-      password: password,
-    };
-    
-  }
-  
+  }  
 }

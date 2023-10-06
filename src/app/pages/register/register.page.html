@@ -46,6 +46,9 @@
             <div slot="label">Confirme Contraseña <ion-text color="danger">(Obligatorio)</ion-text></div>
           </ion-input>
         </ion-item>
+        <ion-text color="danger" *ngIf="formularioRegister.hasError('passwordMismatch', 'confpassword')">
+          ¡Las contraseñas no coinciden!
+        </ion-text>
 
         <ion-list>
           <ion-item>

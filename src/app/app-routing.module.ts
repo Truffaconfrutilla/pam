@@ -12,27 +12,27 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'add',
+    path: 'apiadd',
     loadChildren: () => import('./api/add/add.module').then( m => m.AddPageModule)
   },
   {
-    path: 'delete',
+    path: 'apidelete',
     loadChildren: () => import('./api/delete/delete.module').then( m => m.DeletePageModule)
   },
   {
-    path: 'update',
+    path: 'apiupdate',
     loadChildren: () => import('./api/update/update.module').then( m => m.UpdatePageModule)
   },
   {
-    path: 'detail',
+    path: 'apidetail',
     loadChildren: () => import('./api/detail/detail.module').then( m => m.DetailPageModule)
   },
   {
-    path: 'list',
+    path: 'apilist',
     loadChildren: () => import('./api/list/list.module').then( m => m.ListPageModule)
   },
   {
-    path: 'home',
+    path: 'apihome',
     loadChildren: () => import('./api/home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -51,6 +51,27 @@ const routes: Routes = [
     path: 'user-profile',
     loadChildren: () => import('./pages/profiles/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   },
+  {
+    path: 'add-user',
+    loadChildren: () => import('./user-crud/add-user/add-user.module').then( m => m.AddUserPageModule)
+  },
+  {
+    path: 'delete-user',
+    loadChildren: () => import('./user-crud/delete-user/delete-user.module').then( m => m.DeleteUserPageModule)
+  },
+  {
+    path: 'detail-user',
+    loadChildren: () => import('./user-crud/detail-user/detail-user.module').then( m => m.DetailUserPageModule)
+  },
+  {
+    path: 'list-user',
+    loadChildren: () => import('./user-crud/list-user/list-user.module').then( m => m.ListUserPageModule)
+  },
+  {
+    path: 'update-user',
+    loadChildren: () => import('./user-crud/update-user/update-user.module').then( m => m.UpdateUserPageModule)
+  },
+
 
 ];
 

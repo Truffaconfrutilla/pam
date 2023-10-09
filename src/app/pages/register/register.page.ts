@@ -5,6 +5,7 @@ import { MenuController, NavController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 // Función independiente para validar contraseñas
@@ -34,6 +35,7 @@ export class RegisterPage implements OnInit {
     private toastController: ToastController,
     private navCtrl: NavController,
     private authService: AuthService,
+    private usuarioService: UsuarioService
   ) {
     this.formularioRegister = this.fb.group(
       {
@@ -85,6 +87,9 @@ export class RegisterPage implements OnInit {
       // Intentamos registrar al usuario utilizando el servicio de autenticación
       this.authService.registrarUsuario(userData);
   
+      // Agregamos al usuario al servicio UsuarioService
+      this.usuarioService.agregarUsuario(userData);
+
       // Registro exitoso, redirigimos al usuario a la página de inicio de sesión
       Swal.fire({
         heightAuto: false,

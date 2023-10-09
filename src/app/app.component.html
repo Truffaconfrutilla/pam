@@ -1,3 +1,58 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="main-content">
+    <ion-menu  contentId="main-content" type="overlay" menuId="menu" *ngIf="mostrarMenu()">
+      <ion-content >
+        <ion-list id="inbox-list">
+          <ion-toolbar color="azulduoc">  
+            <ion-title>
+              ¡Bienvenido!
+            </ion-title>                  
+          <ion-note color="amarilloduoc">Mensaje de saludo promedio</ion-note>
+        </ion-toolbar>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon color="azulduoc"  aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>        
+      </ion-content>
+    </ion-menu>
+<!--
+    <ion-menu contentId="main-content" type="overlay" >
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header>CRUD</ion-list-header>
+          <ion-note>el crud bonito</ion-note>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of crud; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <ion-list>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+-->
+    <ion-menu contentId="main-content" type="overlay" *ngIf="mostrarMenuApi()">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header>MENU API</ion-list-header>
+          <ion-note>Mensaje api promedio</ion-note>
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appApi; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <ion-list>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

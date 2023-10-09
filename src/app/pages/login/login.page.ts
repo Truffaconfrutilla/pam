@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RandomUserService } from 'src/app/services/random-users.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import Swal from 'sweetalert2';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginPage implements OnInit {
 
+  listaUsuarios: Usuario[] = [];
   formularioLogin: FormGroup;
   //user: any; 
   //emailValue?: string;
@@ -29,6 +31,7 @@ export class LoginPage implements OnInit {
     private toastController: ToastController,
     private randomUserService: RandomUserService,
     private authService: AuthService,
+    private usuarioService: UsuarioService
   ) {
     this.formularioLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

@@ -35,7 +35,7 @@ export class RegisterPage implements OnInit {
     private toastController: ToastController,
     private navCtrl: NavController,
     private authService: AuthService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
   ) {
     this.formularioRegister = this.fb.group(
       {
@@ -88,7 +88,7 @@ export class RegisterPage implements OnInit {
       this.authService.registrarUsuario(userData);
   
       // Agregamos al usuario al servicio UsuarioService
-      this.usuarioService.agregarUsuario(userData);
+      this.usuarioService.addUsuarios(userData);
 
       // Registro exitoso, redirigimos al usuario a la página de inicio de sesión
       Swal.fire({

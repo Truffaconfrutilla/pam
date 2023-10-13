@@ -28,14 +28,14 @@ export class AppComponent {
     { title: 'Cerrar Sesión', url: '/login', icon: 'log-out' },
   ];
 
-  //public crud = [    
-  //  { title: 'List', url: '/list-user', icon: 'people-circle' },
-  //  { title: 'Add', url: '/add-user', icon: 'people' },
-  //  { title: 'Delete', url: '/delete-user', icon: 'people' },
-  //  { title: 'Update', url: '/update-user', icon: 'analytics' },
-  //  { title: 'Detail', url: '/detail-user', icon: 'medal' },
-  //  { title: 'Cerrar Sesión', url: '/login', icon: 'log-out' },
-  //];
+ public crud = [    
+   { title: 'List', url: '/list-user', icon: 'people-circle' },
+   { title: 'Add', url: '/add-user', icon: 'people' },
+   { title: 'Delete', url: '/delete-user', icon: 'people' },
+   { title: 'Update', url: '/update-user', icon: 'analytics' },
+   { title: 'Detail', url: '/detail-user', icon: 'medal' },
+   { title: 'Cerrar Sesión', url: '/login', icon: 'log-out' },
+ ];
 
   constructor(private router: Router) {}
 
@@ -47,5 +47,10 @@ export class AppComponent {
     const aux = ['apihome','apiadd','apidelete','apiupdate','apilist','apidetail']
     return aux.includes(this.router.url.substring(1)) // ELIMINAMOS EL "/"
     //return this.router.url == '/apihome';
+  }
+
+  mostrarCrud() {
+    const aux = ['list-user','add-user','delete-user','update-user','detail-user']
+    return aux.includes(this.router.url.substring(1))
   }
 }

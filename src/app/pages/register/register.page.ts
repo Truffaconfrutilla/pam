@@ -89,6 +89,7 @@ export class RegisterPage implements OnInit {
   
       // Agregamos al usuario al servicio UsuarioService
       this.usuarioService.addUsuarios(userData);
+      console.log(userData);
 
       // Registro exitoso, redirigimos al usuario a la página de inicio de sesión
       Swal.fire({

@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true" >
+
+  <ion-header >
+    <ion-toolbar color="azulduoc">
+      <ion-text>                
+        <div class="ion-text-center">
+          <ion-text color="amarilloduoc">API </ion-text>developer <ion-text color="amarilloduoc">LIST</ion-text>
+        </div>
+      </ion-text>         
+    </ion-toolbar>
+  </ion-header>
+
+  
+    <ion-list [inset]="true" >
+      <ion-item *ngFor="let x of listado; let indexArray = index">
+        <ion-label>{{x.name }}</ion-label>      
+      </ion-item>
+    </ion-list>
+
+
+</ion-content>

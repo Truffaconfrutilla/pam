@@ -1,0 +1,45 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header >
+    <ion-toolbar color="azulduoc">
+      <ion-text>        
+        <div class="ion-text-center style-h-text">
+          Te<ion-text color="amarilloduoc">Llevo</ion-text>App
+        </div>
+      </ion-text>         
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-card >    
+    <ion-card-header >       
+      <ion-text color="azulduoc" style="font-weight: bold; font-size: 30px;"> <ion-icon name="enter-outline"></ion-icon> Login</ion-text>
+    </ion-card-header> 
+      <form >      
+        <ion-item>
+          <ion-input #user formControlName="email" type="text" color="azulduoc" label="Ingrese email de Usuario:" labelPlacement="floating" placeholder="Ej: jefeyapague@porfavor@porfis.aaa"></ion-input>
+        </ion-item>
+        <ion-text pasition="stacked" color="danger" >
+          El correo es obligatorio.
+        </ion-text>
+        <ion-text pasition="stacked" color="danger" >
+          El correo es inválido.
+        </ion-text>
+
+        <ion-item>
+          <ion-input #password formControlName="password" type="password" color="azulduoc" label="Ingrese Contraseña:" labelPlacement="floating" placeholder="Ej: Quierodormir123"></ion-input>
+        </ion-item>
+        <ion-text pasition="stacked" color="danger" >
+          La contraseña es obligatoria.
+        </ion-text>
+        <ion-text pasition="stacked" color="danger">
+          La contraseña debe tener almenos 6 caracteres.
+        </ion-text>
+
+        <ion-button color="azulduoc" >Ingresar</ion-button>
+        <ion-button color="azulduoc" >Registrarse</ion-button>
+        <br>
+        <ion-text color="amarilloduoc" style="font-size: 12px;font-weight: bolder;" >Recuperar contraseña</ion-text>
+      </form>    
+    </ion-card>
+
+</ion-content>
